@@ -40,6 +40,13 @@
     # - Inter
     # - Geist / Geist Mono
     # - FiraCode Nerd Font
+    # Example nixpkgs names to verify later:
+    # - nerd-fonts.jetbrains-mono
+    # - source-han-sans / source-han-serif
+    # - inter
+    # - geist-font
+    # - geist-mono-font
+    # - nerd-fonts.fira-code
     packages = with pkgs; [
       fira-code
       inter

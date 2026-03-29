@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 
 {
   programs.zed-editor = {
@@ -19,6 +19,8 @@
         dark = "Catppuccin Macchiato";
         light = "Catppuccin Latte";
       };
+      buffer_font_family = theme.font.mono;
+      ui_font_family = theme.font.sans;
     };
   };
 }

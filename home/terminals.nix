@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 
 {
   programs.alacritty = {
@@ -6,7 +6,7 @@
     settings = {
       env.TERM = "xterm-256color";
       font = {
-        normal.family = "JetBrains Mono";
+        normal.family = theme.font.mono;
         size = 11.0;
       };
       window = {
@@ -49,7 +49,7 @@
   programs.ghostty = {
     enable = true;
     settings = {
-      "font-family" = "JetBrains Mono";
+      "font-family" = theme.font.mono;
       "gtk-titlebar" = false;
       "shell-integration" = "zsh";
       theme = "catppuccin-macchiato";

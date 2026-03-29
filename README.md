@@ -23,6 +23,7 @@ Layout:
 - `desktop/` - tty/sway session wiring
 - `network/` - NextDNS and related network settings
 - `home/` - Home Manager modules
+- `theme/` - shared Catppuccin Macchiato palette values
 - `packages/tpm2ssh/` - local package source copied from the current project
 
 ## Root-only reinstall notes

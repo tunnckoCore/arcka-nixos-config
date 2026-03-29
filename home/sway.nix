@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, theme, ... }:
 
 let
   modifier = "Mod1";
@@ -46,6 +46,7 @@ in {
       };
       startup = [
         { command = "dbus-update-activation-environment --systemd --all"; }
+        { command = "nm-applet --indicator"; }
       ];
       keybindings = lib.mkOptionDefault {
         "Control+space" = "exec rofi -show drun";
@@ -73,9 +74,12 @@ in {
     extraConfig = ''
       include /etc/sway/config.d/*
       default_border pixel 1
-      client.focused #8aadf4 #8aadf4 #24273a #8aadf4 #8aadf4
-      client.unfocused #363a4f #363a4f #cad3f5 #363a4f #363a4f
-      client.urgent #ed8796 #ed8796 #24273a #ed8796 #ed8796
+      default_border pixel 2
+      gaps inner 10
+      gaps outer 6
+      client.focused #${theme.blue} #${theme.blue} #${theme.base} #${theme.blue} #${theme.blue}
+      client.unfocused #${theme.surface0} #${theme.surface0} #${theme.text} #${theme.surface0} #${theme.surface0}
+      client.urgent #${theme.red} #${theme.red} #${theme.base} #${theme.red} #${theme.red}
       bindsym ${modifier}+1 workspace number 1
       bindsym ${modifier}+2 workspace number 2
       bindsym ${modifier}+3 workspace number 3
@@ -97,11 +101,4 @@ in {
     '';
   };
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    package = pkgs.adwaita-icon-theme;
-    name = "Adwaita";
-    size = 24;
-  };
 }

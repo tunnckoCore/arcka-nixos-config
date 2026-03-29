@@ -25,8 +25,15 @@
       "browser.aboutConfig.showWarning" = false;
       "browser.tabs.warnOnClose" = false;
       "identity.fxaccounts.enabled" = false;
+      "layout.css.prefers-color-scheme.content-override" = 0;
       "privacy.donottrackheader.enabled" = true;
+      "ui.systemUsesDarkTheme" = 1;
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
   };
+
+  home.file.".config/brave-flags.conf".text = ''
+    --force-dark-mode
+    --enable-features=WebUIDarkMode,CSSColorSchemeUARendering
+  '';
 }

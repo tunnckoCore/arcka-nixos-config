@@ -8,6 +8,8 @@
     ./bitwarden.nix
     ./browsers.nix
     ./editor.nix
+    ./gtk.nix
+    ./rofi.nix
     ./terminals.nix
     ./sway.nix
   ];
