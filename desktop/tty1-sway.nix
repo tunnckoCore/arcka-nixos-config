@@ -32,7 +32,7 @@
   };
 
   environment.loginShellInit = ''
-    if [ "$USER" = "arcka" ] && [ "$(tty)" = "/dev/tty1" ] && [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
+    if [ "$USER" = "arcka" ] && [ "$(tty)" = "/dev/tty1" ] && [ -z "''${DISPLAY:-}" ] && [ -z "''${WAYLAND_DISPLAY:-}" ]; then
       if tpm2ssh --login; then
         exec dbus-run-session sway
       fi
