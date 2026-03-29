@@ -2,3 +2,6 @@ result
 .direnv
 *.swp
 *.retry
+node_modules
+*.env*
+!.env.example
