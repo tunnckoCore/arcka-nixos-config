@@ -70,6 +70,7 @@ After first boot into installer environment:
 Things to be careful about:
 
 - The install script regenerates `hardware-configuration.nix` from the mounted target and drops it into the repo automatically.
+- The install script does a preflight first: checks UEFI mode, verifies network, test-mounts `/boot` and `/home` read-only, and only formats root after those pass.
 - Browser policies and CLI packages should work only after the first rebuild, not inside the live ISO.
 - `tpm2ssh` setup itself is not automated here; only the package and login hook are wired.
 - If tty login succeeds but `tpm2ssh --login` fails, the shell exits and you should get the tty login prompt again.
