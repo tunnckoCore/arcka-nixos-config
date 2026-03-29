@@ -1,6 +1,7 @@
 { lib, pkgs, theme, ... }:
 
 let
+  # Mod1 is Alt in Sway/i3 terminology.
   modifier = "Mod1";
   rofiNetwork = pkgs.writeShellApplication {
     name = "rofi-network";
