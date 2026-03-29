@@ -17,7 +17,6 @@ Layout:
 - `flake.nix` - flake entrypoint
 - `configuration.nix` - host imports
 - `hardware-configuration.nix` - hardware baseline
-- `mounts.nix` - root, boot, home mounts
 - `system-packages.nix` - small global package set
 - `users/` - user definitions
 - `desktop/` - tty/sway session wiring
@@ -48,25 +47,29 @@ Manual partition intent:
 - `/dev/nvme0n1p2` mounted at `/`, `ext4`, format this one only
 - `/dev/nvme0n1p3` mounted at `/home`, `ext4`, no format
 
+Minimal ISO scripted path:
+
+```bash
+sudo -i
+nmtui
+git clone https://github.com/tunnckoCore/arcka-nixos-config.git
+cd arcka-nixos-config
+./install-root-only.sh
+nixos-enter --root /mnt -c 'passwd arcka'
+reboot
+```
+
 After first boot into installer environment:
 
 1. Confirm partitions with `lsblk -f`.
-2. Clone or copy this repo locally.
-3. Install with the generated root mounted the same way as above.
-4. Set a temporary password for `arcka` during install or immediately after first boot.
-5. Run `sudo nixos-rebuild switch --flake .#tarckan`.
-6. Verify tty login, `tpm2ssh --login`, Sway start, WiFi switching, and NextDNS.
+2. Clone this repo in the live ISO.
+3. Run `./install-root-only.sh`.
+4. Set the password for `arcka` with `nixos-enter --root /mnt -c 'passwd arcka'`.
+5. Reboot and test tty login, `tpm2ssh --login`, Sway start, WiFi switching, and NextDNS.
 
 Things to be careful about:
 
-- `mounts.nix` currently uses `/dev/nvme0n1p1/2/3`, not UUIDs.
-- If the installer generates a different `hardware-configuration.nix`, merge it instead of blindly replacing this repo's version.
+- The install script regenerates `hardware-configuration.nix` from the mounted target and drops it into the repo automatically.
 - Browser policies and CLI packages should work only after the first rebuild, not inside the live ISO.
 - `tpm2ssh` setup itself is not automated here; only the package and login hook are wired.
 - If tty login succeeds but `tpm2ssh --login` fails, the shell exits and you should get the tty login prompt again.
-
-Notes:
-
-- `helium`, `zen`, `crush`, and `xfce4-terminal` are intentionally not included yet.
-- `tpm2ssh` is wired in with its current interactive `--login` flow.
-- `mounts.nix` currently uses device paths for this laptop on purpose.

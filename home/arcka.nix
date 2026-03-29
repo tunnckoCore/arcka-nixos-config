@@ -16,7 +16,7 @@
 
   home.username = "arcka";
   home.homeDirectory = "/home/arcka";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   home.sessionVariables = {
     EDITOR = "zeditor";
@@ -30,6 +30,8 @@
     codex
     just
     opencode
+    file-roller
+    thunar
   ];
 
   home.file.".agents/.keep".text = "";

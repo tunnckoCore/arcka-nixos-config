@@ -74,6 +74,7 @@ in {
         "${modifier}+Shift+Return" = "exec ghostty";
         "${modifier}+b" = "exec librewolf";
         "${modifier}+Shift+b" = "exec brave";
+        "${modifier}+f" = "exec thunar";
         "${modifier}+e" = "exec zeditor";
         "${modifier}+d" = "exec rofi -show drun";
         "${modifier}+w" = "exec rofi-network";

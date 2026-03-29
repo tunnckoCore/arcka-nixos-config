@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./mounts.nix
     ./system-packages.nix
     ./users/arcka.nix
     ./desktop/tty1-sway.nix
@@ -35,6 +34,9 @@
     pulse.enable = true;
   };
 
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
   programs.zsh.enable = true;
   programs.dconf.enable = true;
   programs.ssh.startAgent = true;
@@ -57,5 +59,5 @@
     enable32Bit = true;
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
