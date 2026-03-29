@@ -3,6 +3,25 @@
 let
   # Mod1 is Alt in Sway/i3 terminology.
   modifier = "Mod1";
+  rofiLenovoKeyboard = pkgs.writeShellApplication {
+    name = "rofi-lenovo-kb";
+    runtimeInputs = [ pkgs.findutils pkgs.coreutils pkgs.sudo ];
+    text = ''
+      set -eu
+
+      kbd_sys_path="$(find /sys/devices/platform/i8042 -name inhibited | head -n 1)"
+      [ -n "''$kbd_sys_path" ] || exit 1
+
+      current="$(cat "''$kbd_sys_path")"
+      if [ "''$current" = "1" ]; then
+        next="0"
+      else
+        next="1"
+      fi
+
+      printf '%s\n' "''$next" | sudo tee "''$kbd_sys_path" >/dev/null
+    '';
+  };
   rofiNetwork = pkgs.writeShellApplication {
     name = "rofi-network";
     runtimeInputs = [ pkgs.networkmanager pkgs.rofi-wayland ];
@@ -12,22 +31,22 @@ let
       selection="$(${pkgs.networkmanager}/bin/nmcli -t -f IN-USE,SSID,SECURITY,SIGNAL device wifi list --rescan yes \
         | awk -F: '{ if ($2 != "") printf("%s %s (%s%%)\n", ($1 == "*" ? "*" : " "), $2, $4); }' \
         | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p 'WiFi')"
-      [ -n "$selection" ] || exit 0
+      [ -n "''$selection" ] || exit 0
 
-      ssid="$(printf '%s' "$selection" | sed 's/^[* ] //' | sed 's/ ([0-9]\+%)$//')"
-      [ -n "$ssid" ] || exit 1
+      ssid="$(printf '%s' "''$selection" | sed 's/^[* ] //' | sed 's/ ([0-9]\+%)$//')"
+      [ -n "''$ssid" ] || exit 1
 
-      if ${pkgs.networkmanager}/bin/nmcli connection up "$ssid" >/dev/null 2>&1; then
+      if ${pkgs.networkmanager}/bin/nmcli connection up "''$ssid" >/dev/null 2>&1; then
         exit 0
       fi
 
-      password="$(printf '' | ${pkgs.rofi-wayland}/bin/rofi -dmenu -password -p "Password for $ssid")"
-      [ -n "$password" ] || exit 1
-      ${pkgs.networkmanager}/bin/nmcli device wifi connect "$ssid" password "$password"
+      password="$(printf "" | ${pkgs.rofi-wayland}/bin/rofi -dmenu -password -p "Password for ''$ssid")"
+      [ -n "''$password" ] || exit 1
+      ${pkgs.networkmanager}/bin/nmcli device wifi connect "''$ssid" password "''$password"
     '';
   };
 in {
-  home.packages = [ rofiNetwork ];
+  home.packages = [ rofiLenovoKeyboard rofiNetwork ];
 
   wayland.windowManager.sway = {
     enable = true;
@@ -58,6 +77,7 @@ in {
         "${modifier}+e" = "exec zeditor";
         "${modifier}+d" = "exec rofi -show drun";
         "${modifier}+w" = "exec rofi-network";
+        "${modifier}+Shift+w" = "exec rofi-lenovo-kb";
         "${modifier}+p" = "exec rofi-bitwarden";
         "${modifier}+Shift+q" = "kill";
         "${modifier}+h" = "focus left";

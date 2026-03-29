@@ -17,9 +17,6 @@
     ];
     dnsovertls = "true";
   };
-
-  programs.captive-browser.enable = true;
-
   environment.etc."brave/policies/managed/nextdns.json".text = builtins.toJSON {
     BraveBrowserSecureDnsMode = "secure";
     BraveBrowserSecureDnsTemplate = "https://dns.nextdns.io/1ad4de";

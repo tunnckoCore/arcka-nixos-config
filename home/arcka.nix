@@ -27,7 +27,9 @@
   home.packages = with pkgs; [
     brave
     bitwarden-cli
+    codex
     just
+    opencode
   ];
 
   home.file.".agents/.keep".text = "";

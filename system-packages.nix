@@ -9,7 +9,6 @@
     git
     jq
     networkmanagerapplet
-    nm-connection-editor
     openvpn
     pciutils
     podman

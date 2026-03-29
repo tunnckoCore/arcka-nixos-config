@@ -12,18 +12,18 @@ let
         exit 1
       fi
 
-      session="${BW_SESSION:-}"
-      if [ -z "$session" ]; then
-        password="$(printf '' | rofi -dmenu -password -p 'Bitwarden unlock')"
-        [ -n "$password" ] || exit 1
-        session="$(BW_PASSWORD="$password" bw unlock --passwordenv BW_PASSWORD --raw)"
+      session="''${BW_SESSION:-}"
+      if [ -z "''$session" ]; then
+        password="$(printf "" | rofi -dmenu -password -p 'Bitwarden unlock')"
+        [ -n "''$password" ] || exit 1
+        session="$(BW_PASSWORD="''$password" bw unlock --passwordenv BW_PASSWORD --raw)"
       fi
 
-      selection="$(${pkgs.bitwarden-cli}/bin/bw list items --session "$session" | ${pkgs.jq}/bin/jq -r '.[] | select(.login != null) | .name' | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p 'Bitwarden')"
-      [ -n "$selection" ] || exit 0
+      selection="$(${pkgs.bitwarden-cli}/bin/bw list items --session "''$session" | ${pkgs.jq}/bin/jq -r '.[] | select(.login != null) | .name' | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p 'Bitwarden')"
+      [ -n "''$selection" ] || exit 0
 
-      ${pkgs.bitwarden-cli}/bin/bw list items --session "$session" \
-        | ${pkgs.jq}/bin/jq -r --arg name "$selection" '.[] | select(.name == $name) | .login.password // empty' \
+      ${pkgs.bitwarden-cli}/bin/bw list items --session "''$session" \
+        | ${pkgs.jq}/bin/jq -r --arg name "''$selection" '.[] | select(.name == $name) | .login.password // empty' \
         | head -n1 \
         | ${pkgs.wl-clipboard}/bin/wl-copy
     '';
