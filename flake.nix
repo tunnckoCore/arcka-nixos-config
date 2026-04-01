@@ -2,10 +2,10 @@
   description = "arcka's NixOS configuration for tarckan";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -16,6 +16,7 @@
       theme = import ./theme/theme.nix;
 
       overlay = final: prev: {
+        helium = final.callPackage ./packages/helium { };
         tpm2ssh = final.rustPlatform.buildRustPackage {
           pname = "tpm2ssh";
           version = "0.1.0";
@@ -37,6 +38,18 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager
         ];
+      };
+
+      homeConfigurations.arcka = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ overlay ];
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit theme;
+        };
+        modules = [ ./home/arcka.nix ];
       };
     };
 }

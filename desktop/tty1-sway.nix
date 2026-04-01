@@ -33,12 +33,12 @@
 
   environment.loginShellInit = ''
     if [ "$USER" = "arcka" ] && [ "$(tty)" = "/dev/tty1" ] && [ -z "''${DISPLAY:-}" ] && [ -z "''${WAYLAND_DISPLAY:-}" ]; then
-      if tpm2ssh --login; then
+      # if tpm2ssh --login; then
         exec dbus-run-session sway
-      fi
+      #fi
 
-      printf '%s\n' 'tpm2ssh login failed; returning to tty login.'
-      exit 1
+      #printf '%s\n' 'tpm2ssh login failed; returning to tty login.'
+      #exit 1
     fi
   '';
 }

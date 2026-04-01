@@ -1,6 +1,41 @@
 { theme, ... }:
 
 {
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = theme.font.mono;
+      size = 11.0;
+    };
+    settings = {
+      confirm_os_window_close = 0;
+      hide_window_decorations = "yes";
+      shell_integration = "enabled";
+      background_opacity = "0.97";
+      window_padding_width = 10;
+      foreground = "#cad3f5";
+      background = "#24273a";
+      selection_foreground = "#24273a";
+      selection_background = "#f4dbd6";
+      color0 = "#494d64";
+      color1 = "#ed8796";
+      color2 = "#a6da95";
+      color3 = "#eed49f";
+      color4 = "#8aadf4";
+      color5 = "#f5bde6";
+      color6 = "#8bd5ca";
+      color7 = "#b8c0e0";
+      color8 = "#5b6078";
+      color9 = "#ed8796";
+      color10 = "#a6da95";
+      color11 = "#eed49f";
+      color12 = "#8aadf4";
+      color13 = "#f5bde6";
+      color14 = "#8bd5ca";
+      color15 = "#a5adcb";
+    };
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {

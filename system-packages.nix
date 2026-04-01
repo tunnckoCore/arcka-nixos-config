@@ -6,21 +6,29 @@
     curl
     fd
     gh
+    helium
+    imv
+    nodejs
     git
     jq
     networkmanagerapplet
     openvpn
     pciutils
+    p7zip
     podman
     podman-compose
     podman-tui
+    python3
     ripgrep
+    pcmanfm
     tpm2-tools
     tpm2ssh
     unzip
     usbutils
     wget
+    wl-clipboard
     wireguard-tools
+    xarchiver
     zip
   ];
 

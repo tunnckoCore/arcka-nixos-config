@@ -26,6 +26,9 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.sudo.enable = true;
+  security.sudo.extraConfig = ''
+    arcka ALL=(root) NOPASSWD: /run/current-system/sw/bin/tee /sys/devices/platform/i8042/*/inhibited
+  '';
 
   services.pipewire = {
     enable = true;
@@ -59,5 +62,5 @@
     enable32Bit = true;
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "25.05";
 }

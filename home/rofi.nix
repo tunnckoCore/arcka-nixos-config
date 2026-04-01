@@ -1,26 +1,25 @@
-{ config, lib, pkgs, theme, ... }:
+{ theme, ... }:
 
 let
   rofiConfig = ''
     configuration {
       modi: "drun,run,window";
       show-icons: true;
-      terminal: "alacritty";
+      terminal: "kitty";
       drun-display-format: "{name}";
       hover-select: false;
-      kb-row-select: "Tab";
       kb-cancel: "Escape,Control+g";
       font: "${theme.font.sans} 12";
     }
 
     * {
-      bg: #${theme.base}f2;
+      bg: #${theme.base}ff;
       bg-alt: #${theme.surface0}ff;
       fg: #${theme.text}ff;
       fg-muted: #${theme.subtext0}ff;
       border: #${theme.blue}ff;
       urgent: #${theme.red}ff;
-      selected: #${theme.surface1}ff;
+      selected: #${theme.blue}ff;
       active: #${theme.green}ff;
       prompt: #${theme.blue}ff;
     }
@@ -36,12 +35,14 @@ let
     }
 
     mainbox {
+      background-color: transparent;
       spacing: 14px;
       children: [ "inputbar", "listview" ];
     }
 
     inputbar {
       background-color: @bg-alt;
+      text-color: @fg;
       border-radius: 12px;
       padding: 10px 12px;
       children: [ "prompt", "entry" ];
@@ -63,6 +64,7 @@ let
       columns: 1;
       fixed-height: false;
       background-color: transparent;
+      text-color: @fg;
       scrollbar: false;
       spacing: 8px;
     }
@@ -74,9 +76,19 @@ let
       padding: 10px 12px;
     }
 
+    element normal.normal {
+      background-color: transparent;
+      text-color: @fg;
+    }
+
+    element alternate.normal {
+      background-color: transparent;
+      text-color: @fg;
+    }
+
     element selected.normal {
       background-color: @selected;
-      text-color: @fg;
+      text-color: #${theme.crust}ff;
     }
 
     element selected.urgent {
@@ -84,13 +96,26 @@ let
       text-color: #${theme.crust}ff;
     }
 
+    element selected.active {
+      background-color: @active;
+      text-color: #${theme.crust}ff;
+    }
+
     element-icon {
       size: 1.05em;
       vertical-align: 0.5;
+      background-color: transparent;
     }
 
     element-text {
       text-color: inherit;
+      background-color: transparent;
+    }
+
+    textbox,
+    error-message {
+      text-color: @fg;
+      background-color: transparent;
     }
   '';
 in {

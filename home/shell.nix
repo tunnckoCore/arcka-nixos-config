@@ -25,9 +25,15 @@
     shellAliases = {
       lsal = "ls --color=always -v --group-directories-first -F -l";
       gs = "git status -sb";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-config#tarckan";
+      zed = "zeditor";
+      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#tarckan";
     };
     initContent = ''
       export PATH="$HOME/.local/bin:$PATH"
+      export PATH="$HOME/.opencode/bin:$PATH"
+      export BUN_INSTALL="$HOME/.config/bun"
+      export PATH="$BUN_INSTALL/bin:$PATH"
     '';
   };
 
@@ -35,8 +41,8 @@
     COLOR_SCHEME = "prefer-dark";
     GTK_APPLICATION_PREFER_DARK_THEME = "1";
     GTK_THEME = "Catppuccin-Macchiato-Standard-Blue-Dark";
-    XCURSOR_THEME = "Catppuccin-Macchiato-Dark-Cursors";
-    XCURSOR_SIZE = "24";
+    XCURSOR_THEME = "DMZ-White";
+    XCURSOR_SIZE = "32";
   };
 
   programs.fzf.enable = true;

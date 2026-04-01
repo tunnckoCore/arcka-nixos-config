@@ -8,13 +8,13 @@ let
     variant = theme.variant;
   };
 
-  cursorTheme = pkgs.catppuccin-cursors.macchiatoDark;
+  cursorTheme = pkgs.vanilla-dmz;
 
   iconTheme = pkgs.papirus-icon-theme.override {
     color = "blue";
   };
 in {
-  home.packages = [ gtkTheme iconTheme ];
+  home.packages = [ gtkTheme iconTheme cursorTheme ];
 
   gtk = {
     enable = true;
@@ -49,15 +49,18 @@ in {
       color-scheme = "prefer-dark";
       gtk-theme = "Catppuccin-${theme.variant}-Standard-Blue-Dark";
       icon-theme = "Papirus-Dark";
-      cursor-theme = "Catppuccin-Macchiato-Dark-Cursors";
+      cursor-theme = "DMZ-White";
+      cursor-size = 32;
     };
   };
 
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
+    sway.enable = true;
     x11.enable = true;
     package = cursorTheme;
-    name = "Catppuccin-Macchiato-Dark-Cursors";
-    size = 24;
+    name = "DMZ-White";
+    size = 32;
   };
 }
