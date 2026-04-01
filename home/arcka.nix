@@ -33,6 +33,10 @@
   ];
 
   home.file.".agents/.keep".text = "";
+  home.file.".ssh/config".text = ''
+    Host localhost
+        UserKnownHostsFile /dev/null
+  '';
   home.file.".local/bin/disable_lenovo_kb.sh" = {
     executable = true;
     text = ''

@@ -34,6 +34,8 @@
       export PATH="$HOME/.opencode/bin:$PATH"
       export BUN_INSTALL="$HOME/.config/bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
+      export CLAUDE_CODE_USE_OPENAI=1
+      export OPENCLAUDE_DISABLE_CO_AUTHORED_BY=1
     '';
   };
 
