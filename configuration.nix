@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -43,12 +43,47 @@
   programs.zsh.enable = true;
   programs.dconf.enable = true;
   programs.ssh.startAgent = true;
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      alsa-lib
+      at-spi2-atk
+      atk
+      cairo
+      cups
+      dbus
+      expat
+      gdk-pixbuf
+      glib
+      gtk3
+      libdrm
+      mesa
+      nspr
+      nss
+      pango
+      stdenv.cc.cc.lib
+      xorg.libX11
+      xorg.libxcb
+      xorg.libXcomposite
+      xorg.libXcursor
+      xorg.libXdamage
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXi
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXtst
+    ];
+  };
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     trusted-users = [ "root" "arcka" ];
+  };
+
+  environment.sessionVariables = {
+    LD_LIBRARY_PATH = "/run/current-system/sw/share/nix-ld/lib";
   };
 
   nix.gc = {

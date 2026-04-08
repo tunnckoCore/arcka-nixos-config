@@ -34,8 +34,10 @@
       export PATH="$HOME/.opencode/bin:$PATH"
       export BUN_INSTALL="$HOME/.config/bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
+      export LD_LIBRARY_PATH="/run/current-system/sw/share/nix-ld/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
       export CLAUDE_CODE_USE_OPENAI=1
       export OPENCLAUDE_DISABLE_CO_AUTHORED_BY=1
+      export PI_CODING_AGENT_DIR="$HOME/.config/pi/agent"
     '';
   };
 

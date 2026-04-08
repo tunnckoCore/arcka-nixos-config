@@ -4,7 +4,7 @@
   networking.networkmanager.dns = "systemd-resolved";
   networking.nameservers = [
     "45.90.28.100#1ad4de.dns.nextdns.io"
-    "45.90.30.100#1ad4de.dns.nextdns.io"   
+    "45.90.30.100#1ad4de.dns.nextdns.io"
   ];
 
   services.resolved = {

@@ -3,8 +3,11 @@
 {
   environment.systemPackages = with pkgs; [
     age
+    cargo
+    clippy
     curl
     fd
+    gcc
     gh
     helium
     imv
@@ -18,11 +21,17 @@
     podman
     podman-compose
     podman-tui
-    python3
+    pipx
+    pkg-config
+    (python3.withPackages (ps: [ ps.pip ]))
     ripgrep
+    rust-analyzer
+    rustc
+    rustfmt
     pcmanfm
     tpm2-tools
     tpm2ssh
+    uv
     unzip
     usbutils
     wget
