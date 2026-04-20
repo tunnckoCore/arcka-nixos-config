@@ -1,6 +1,8 @@
-{ appimageTools, fetchurl, lib, makeDesktopItem, symlinkJoin }:
+{ appimageTools, fetchurl, lib, makeDesktopItem, makeWrapper, symlinkJoin }:
 
 let
+  nextDnsTemplate = "https://dns.nextdns.io/1ad4de";
+
   app = appimageTools.wrapType2 {
     pname = "helium";
     version = "0.10.7.1";
@@ -43,7 +45,7 @@ let
     name = "helium";
     desktopName = "Helium";
     comment = "Private, fast, and honest web browser";
-    exec = "helium --user-data-dir=/home/charlike/.config/net.imput.helium %U";
+    exec = "helium --user-data-dir=/home/arcka/.config/net.imput.helium %U";
     icon = "chromium";
     terminal = false;
     categories = [ "Network" "WebBrowser" ];
@@ -62,5 +64,12 @@ in
 symlinkJoin {
   name = "helium-0.10.7.1";
   paths = [ app desktopItem ];
+  nativeBuildInputs = [ makeWrapper ];
+  postBuild = ''
+    wrapProgram "$out/bin/helium" \
+      --add-flags "--enable-features=DnsOverHttps" \
+      --add-flags "--dns-over-https-mode=secure" \
+      --add-flags "--dns-over-https-templates=${nextDnsTemplate}"
+  '';
   meta = app.meta;
 }

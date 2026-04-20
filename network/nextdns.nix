@@ -18,10 +18,4 @@
     #  "45.90.30.100#1ad4de.dns.nextdns.io"
     #];
   };
-  environment.etc."brave/policies/managed/nextdns.json".text = builtins.toJSON {
-    BraveBrowserSecureDnsMode = "secure";
-    BraveBrowserSecureDnsTemplate = "https://dns.nextdns.io/1ad4de";
-    DnsOverHttpsMode = "secure";
-    DnsOverHttpsTemplates = "https://dns.nextdns.io/1ad4de";
-  };
 }

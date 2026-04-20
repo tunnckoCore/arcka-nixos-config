@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -10,7 +11,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    ...
+  }:
     let
       system = "x86_64-linux";
       theme = import ./theme/theme.nix;
@@ -24,11 +31,17 @@
           cargoLock.lockFile = ./packages/tpm2ssh/Cargo.lock;
         };
       };
+
+      unstablePkgs = import nixpkgs-unstable {
+        inherit system;
+        overlays = [ overlay ];
+        config.allowUnfree = true;
+      };
     in {
       nixosConfigurations.tarckan = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit theme;
+          inherit theme unstablePkgs;
         };
         modules = [
           ({ ... }: {
@@ -47,7 +60,8 @@
           config.allowUnfree = true;
         };
         extraSpecialArgs = {
-          inherit theme;
+          inherit theme unstablePkgs;
+          manageZedViaHomeManager = true;
         };
         modules = [ ./home/arcka.nix ];
       };

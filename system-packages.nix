@@ -6,15 +6,22 @@
     cargo
     clippy
     curl
+    btop
     fd
+    fzf
     gcc
+    gnumake
     gh
+    gzip
     helium
+    htop
     imv
     nodejs
     git
     jq
     networkmanagerapplet
+    openssh
+    openssl
     openvpn
     pciutils
     p7zip
@@ -29,8 +36,10 @@
     rustc
     rustfmt
     pcmanfm
+    tmux
     tpm2-tools
     tpm2ssh
+    tree
     uv
     unzip
     usbutils
@@ -38,6 +47,8 @@
     wl-clipboard
     wireguard-tools
     xarchiver
+    xxd
+    zig
     zip
   ];
 

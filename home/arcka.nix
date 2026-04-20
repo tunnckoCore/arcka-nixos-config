@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, unstablePkgs, manageZedViaHomeManager ? true, ... }:
 
 {
   imports = [
@@ -8,11 +8,12 @@
     ./git.nix
     ./bitwarden.nix
     ./browsers.nix
-    ./editor.nix
     ./gtk.nix
     ./rofi.nix
     ./terminals.nix
     ./sway.nix
+  ] ++ lib.optionals manageZedViaHomeManager [
+    ./editor.nix
   ];
 
   home.username = "arcka";
@@ -22,14 +23,13 @@
   home.sessionVariables = {
     EDITOR = "zeditor";
     VISUAL = "zeditor";
-    BROWSER = "helium";
     TERMINAL = "kitty";
   };
 
   home.packages = with pkgs; [
-    brave
     bitwarden-cli
     file-roller
+    home-manager
   ];
 
   home.file.".agents/.keep".text = "";
@@ -78,5 +78,5 @@
     '';
   };
 
-  programs.home-manager.enable = true;
+  programs.home-manager.enable = false;
 }

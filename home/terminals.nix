@@ -88,6 +88,12 @@
       "gtk-titlebar" = false;
       "shell-integration" = "zsh";
       theme = "catppuccin-macchiato";
+      keybind = [
+        "ctrl+left=csi:1;5D"
+        "ctrl+right=csi:1;5C"
+        "ctrl+delete=csi:3;5~"
+        "ctrl+backspace=text:\\x17"
+      ];
     };
   };
 }

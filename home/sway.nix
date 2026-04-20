@@ -267,7 +267,7 @@ in {
         "${modifier}+${secondaryModifier}+Return" = "exec ghostty";
         "${modifier}+b" = "exec helium";
         "${modifier}+Shift+b" = null;
-        "${modifier}+${secondaryModifier}+b" = "exec brave";
+        "${modifier}+${secondaryModifier}+b" = null;
         "${modifier}+f" = "exec pcmanfm";
         "${modifier}+e" = "exec zeditor";
         "${modifier}+d" = "exec rofi -show drun";

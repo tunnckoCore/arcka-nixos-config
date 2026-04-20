@@ -1,12 +1,13 @@
-{ theme, ... }:
+{ theme, unstablePkgs, ... }:
 
 {
   home-manager = {
     useGlobalPkgs = true;
-    useUserPackages = true;
+    useUserPackages = false;
     backupFileExtension = "hm-bak";
     extraSpecialArgs = {
-      inherit theme;
+      inherit theme unstablePkgs;
+      manageZedViaHomeManager = false;
     };
     users.arcka = import ./arcka.nix;
   };

@@ -1,10 +1,13 @@
-{ ... }:
+{ unstablePkgs, ... }:
 
 {
   xdg.configFile."zed/settings.json".force = true;
+  xdg.configFile."zed/keymap.json".force = true;
 
   programs.zed-editor = {
     enable = true;
+    package = unstablePkgs.zed-editor;
+    extensions = [ "oxc" ];
     userSettings = {
       disable_ai = false;
       show_edit_predictions = false;
@@ -91,5 +94,13 @@
         };
       };
     };
+    userKeymaps = [
+      {
+        context = "Editor";
+        bindings = {
+          ctrl-shift-d = "editor::DuplicateLineDown";
+        };
+      }
+    ];
   };
 }

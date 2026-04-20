@@ -11,6 +11,7 @@
   ];
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "tarckan";
@@ -29,6 +30,12 @@
   security.sudo.extraConfig = ''
     arcka ALL=(root) NOPASSWD: /run/current-system/sw/bin/tee /sys/devices/platform/i8042/*/inhibited
   '';
+
+  security.tpm2 = {
+    enable = true;
+    tctiEnvironment.enable = true;
+    tctiEnvironment.interface = "device";
+  };
 
   services.pipewire = {
     enable = true;
@@ -80,6 +87,7 @@
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     trusted-users = [ "root" "arcka" ];
+    min-free = 1024 * 1024 * 1024;
   };
 
   environment.sessionVariables = {
